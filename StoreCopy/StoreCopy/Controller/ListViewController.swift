@@ -101,10 +101,10 @@ extension ListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 546
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectService = contents[indexPath.row]
+        let detailVC = DetailViewController(service: selectService)
+        self.navigationController?.pushViewController(detailVC, animated: true)
+    }
 }
-
-//extension ListViewController: UITableViewDataSourcePrefetching {
-//    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-//        <#code#>
-//    }
-//}

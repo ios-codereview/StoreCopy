@@ -97,7 +97,7 @@ class ListCell: UITableViewCell {
     }()
     
     private lazy var rating: RatingView = {
-        let view = RatingView()
+        let view = RatingView(averageRating: listData.averageUserRating ?? 0.0)
         view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
@@ -173,6 +173,11 @@ class ListCell: UITableViewCell {
             category.bottomAnchor.constraint(equalTo: price.topAnchor, constant: -5),
             price.leadingAnchor.constraint(equalTo: category.leadingAnchor),
             price.bottomAnchor.constraint(equalTo: lastView.bottomAnchor, constant: -10),
+            
+            rating.topAnchor.constraint(equalTo: lastView.topAnchor, constant: 5),
+            rating.trailingAnchor.constraint(equalTo: lastView.trailingAnchor, constant: -15),
+            rating.widthAnchor.constraint(equalToConstant: 100),
+            rating.heightAnchor.constraint(equalToConstant: 20)
         ])
     }
 }
