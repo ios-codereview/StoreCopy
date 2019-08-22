@@ -8,33 +8,22 @@
 
 import UIKit
 
+
 class DetailViewController: UIViewController {
 
-     let service: ResultData
-    
-    private lazy var carouselCollectionView: UICollectionView = {
-        let layout = StretchyHeaderLayout()
-        layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: UIScreen.main.bounds.width / 2 + 50, height: UIScreen.main.bounds.height / 2 - 30)
-        
-        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        view.contentInset = UIEdgeInsets(top: 0, left: 8, bottom: 8, right: 8)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.dataSource = self
-        view.isPagingEnabled = true
-        view.showsHorizontalScrollIndicator = false
-        view.backgroundColor = .white
-        
-        view.register(CarouselCollectionViewCell.self, forCellWithReuseIdentifier: CarouselCollectionViewCell.reusableIdentifier)
-        
-        return view
-    }()
+    let service: ResultData
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        
+        tableView.register(CarouselTableViewCell.self,
+                      forCellReuseIdentifier: CarouselTableViewCell.reusableIdentifier)
+        tableView.register(InfoTableViewCell.self,
+                           forCellReuseIdentifier: InfoTableViewCell.reusableIdentifier)
         
         return tableView
     }()
@@ -60,38 +49,33 @@ class DetailViewController: UIViewController {
             navigationController?.navigationBar.prefersLargeTitles = false
         }
         
-        view.addSubview(carouselCollectionView)
         view.addSubview(tableView)
         
         configureConstraints()
     }
     
     private func configureConstraints() {
-        if #available(iOS 11.0, *) {
-            NSLayoutConstraint.activate([
-                carouselCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
-                carouselCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                carouselCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                carouselCollectionView.bottomAnchor.constraint(equalTo: tableView.topAnchor),
-                carouselCollectionView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height / 2 - 30),
-                tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                ])
-        }
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
     }
 }
 
 extension DetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-
+        
         var height: CGFloat
         if indexPath.row == 0 {
-            height = 500
+            height = 440
+        } else if indexPath.row == 1{
+            height = 150
         } else {
             height = 50
         }
-
+        
         return height
     }
 }
@@ -103,31 +87,33 @@ extension DetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
+            case 0:
+                if let cell = tableView.dequeueReusableCell(withIdentifier: CarouselTableViewCell.reusableIdentifier, for: indexPath) as? CarouselTableViewCell {
+                    cell.saveImageList = service.screenshotUrls
+                    return cell
+                }
+                return UITableViewCell()
             
+            case 1:
+                if let cell = tableView.dequeueReusableCell(withIdentifier: InfoTableViewCell.reusableIdentifier, for: indexPath) as? InfoTableViewCell {
+                    cell.saveUrlStr = service.trackViewUrl
+                    cell.title.text = service.trackName
+                    cell.seller.text = service.sellerName
+                    cell.price.text = service.formattedPrice.rawValue
+                    
+                    return cell
+                }
+                return UITableViewCell()
             default:
                 return UITableViewCell()
         }
     }
 }
 
-extension DetailViewController: UICollectionViewDelegate {
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 500
-    }
+extension DetailViewController: webButtonDelegate {
+    func webButtonAction(sender: UIButton) {}
 }
 
-extension DetailViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return service.screenshotUrls.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarouselCollectionViewCell.reusableIdentifier, for: indexPath) as? CarouselCollectionViewCell {
-            cell.imgView.downloadImageFrom(service.screenshotUrls[indexPath.item], contentMode: .scaleAspectFill)
-            
-            return cell
-        }
-        
-        return UICollectionViewCell()
-    }
+extension DetailViewController: shareButtonDelegate {
+    func shareButtonAction(sender: UIButton) {}
 }

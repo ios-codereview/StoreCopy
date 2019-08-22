@@ -45,6 +45,10 @@ class ListViewController: UIViewController {
         view.addSubview(tableView)
         title = keyword
         
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = true
+        }
+        
         configureConstraints()
         
         fetchData()
