@@ -39,10 +39,13 @@ struct ResultData: Codable {
     let formattedPrice: FormattedPrice
     let averageUserRating: Double?
     
+    let screenshotUrls: [String]
+    
     enum CodingKeys: String, CodingKey {
         case artworkUrl512, sellerName
         case trackName, genres
         case formattedPrice, averageUserRating
+        case screenshotUrls
     }
 }
 

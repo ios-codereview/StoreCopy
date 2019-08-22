@@ -59,7 +59,6 @@ class RatingView: UIView {
                 starImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: starWidth * CGFloat(i - 1))
             ])
             starImageViews.append(starImageView)
-            print("### :", starImageViews)
         }
     }
 }
