@@ -12,7 +12,6 @@ class CarouselTableViewCell: UITableViewCell {
 
     var saveImageList: [String] = []{
         didSet {
-            print("### :", self.saveImageList.count)
             reloadImageList()
         }
     }
@@ -58,6 +57,7 @@ class CarouselTableViewCell: UITableViewCell {
             carouselCollectionView.topAnchor.constraint(equalTo: contentView.topAnchor),
             carouselCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             carouselCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            carouselCollectionView.heightAnchor.constraint(equalToConstant: 440),
             carouselCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
     }
