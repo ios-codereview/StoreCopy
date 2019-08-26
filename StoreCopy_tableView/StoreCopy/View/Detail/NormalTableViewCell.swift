@@ -38,9 +38,7 @@ class NormalTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        contentView.addSubview(title)
-        contentView.addSubview(data)
-        contentView.addSubview(line)
+        [title, data, line].forEach { contentView.addSubview($0) }
         configure()
     }
     

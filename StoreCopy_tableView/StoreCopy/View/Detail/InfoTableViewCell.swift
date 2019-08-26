@@ -109,14 +109,8 @@ class InfoTableViewCell: UITableViewCell {
     }
     
     private func configure() {
-        contentView.addSubview(title)
-        contentView.addSubview(seller)
-        contentView.addSubview(price)
-        contentView.addSubview(buttonWrap)
-        buttonWrap.addSubview(webButton)
-        buttonWrap.addSubview(halfLine)
-        buttonWrap.addSubview(shareButton)
-        contentView.addSubview(line)
+        [title, seller, price, buttonWrap, line].forEach{ contentView.addSubview($0) }
+        [webButton, halfLine, shareButton].forEach { buttonWrap.addSubview($0) }
         
         configureConstraints()
     }

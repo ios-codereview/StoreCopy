@@ -19,9 +19,9 @@ class DetailViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 60
+//        tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+//        tableView.rowHeight = UITableView.automaticDimension
+//        tableView.estimatedRowHeight = 60
         
         tableView.register(CarouselTableViewCell.self,
                            forCellReuseIdentifier: CarouselTableViewCell.reusableIdentifier)

@@ -75,11 +75,8 @@ class FeatureTableViewCell: UITableViewCell {
     }
     
     private func configure() {
-        contentView.addSubview(topView)
-        topView.addSubview(title)
-        topView.addSubview(data)
-        topView.addSubview(expandArrow)
-        contentView.addSubview(bottomView)
+        [topView, bottomView].forEach { contentView.addSubview($0) }
+        [title, data, expandArrow].forEach { topView.addSubview($0) }
         bottomView.addSubview(bottomViewText)
         
         configureConstraints()

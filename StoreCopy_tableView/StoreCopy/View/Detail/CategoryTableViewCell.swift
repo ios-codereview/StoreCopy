@@ -72,10 +72,7 @@ class CategoryTableViewCell: UITableViewCell {
     }
     
     private func configure() {
-        contentView.addSubview(topView)
-        contentView.addSubview(title)
-        contentView.addSubview(categoryLableView)
-        contentView.addSubview(bottomView)
+        [topView, title, categoryLableView, bottomView].forEach { contentView.addSubview($0) }
     }
     
     private func configureConstraints() {

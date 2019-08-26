@@ -111,19 +111,9 @@ class ListCell: UITableViewCell {
     
     func configure(listData: ResultData, iconImage: UIImage?) {
         self.listData = listData
-        contentView.addSubview(containerLayout)
-        contentView.addSubview(imgView)
-        
-        contentView.addSubview(midView)
-        midView.addSubview(title)
-        midView.addSubview(seller)
-        
-        contentView.addSubview(divideLine)
-        
-        contentView.addSubview(lastView)
-        lastView.addSubview(category)
-        lastView.addSubview(price)
-        lastView.addSubview(rating)
+        [containerLayout, imgView, midView, divideLine, lastView].forEach { contentView.addSubview($0) }
+        [title, seller].forEach { midView.addSubview($0) }
+        [category, price, rating].forEach { lastView.addSubview($0) }
         
         selectionStyle = .none
         backgroundColor = #colorLiteral(red: 0.9568627451, green: 0.9568627451, blue: 0.9568627451, alpha: 1)

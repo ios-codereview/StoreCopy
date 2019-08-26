@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6136D7752313D906002F009E /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6136D7732313D906002F009E /* ListCell.swift */; };
+		6136D7762313D906002F009E /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6136D7742313D906002F009E /* RatingView.swift */; };
 		61518371230E61A600098751 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61518370230E61A600098751 /* DetailViewController.swift */; };
 		61518374230E7CCD00098751 /* StretchyLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61518373230E7CCD00098751 /* StretchyLayout.swift */; };
 		6151837A230E887500098751 /* CarouselCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61518379230E887500098751 /* CarouselCollectionViewCell.swift */; };
@@ -26,11 +28,11 @@
 		619ED4CB230D05BE008A8DB4 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619ED4CA230D05BE008A8DB4 /* Service.swift */; };
 		619ED4CD230D05C8008A8DB4 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619ED4CC230D05C8008A8DB4 /* Data.swift */; };
 		619ED4D0230D16FE008A8DB4 /* reusableIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619ED4CF230D16FE008A8DB4 /* reusableIdentifier.swift */; };
-		619ED4D4230D6C2A008A8DB4 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619ED4D3230D6C2A008A8DB4 /* ListCell.swift */; };
-		619ED4D6230D6E81008A8DB4 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619ED4D5230D6E81008A8DB4 /* RatingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6136D7732313D906002F009E /* ListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListCell.swift; path = StoreCopy/View/ListCell.swift; sourceTree = SOURCE_ROOT; };
+		6136D7742313D906002F009E /* RatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RatingView.swift; path = StoreCopy/View/RatingView.swift; sourceTree = SOURCE_ROOT; };
 		61518370230E61A600098751 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		61518373230E7CCD00098751 /* StretchyLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StretchyLayout.swift; sourceTree = "<group>"; };
 		61518379230E887500098751 /* CarouselCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -52,8 +54,6 @@
 		619ED4CA230D05BE008A8DB4 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		619ED4CC230D05C8008A8DB4 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		619ED4CF230D16FE008A8DB4 /* reusableIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reusableIdentifier.swift; sourceTree = "<group>"; };
-		619ED4D3230D6C2A008A8DB4 /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ListCell.swift; path = ../ListCell.swift; sourceTree = "<group>"; };
-		619ED4D5230D6E81008A8DB4 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RatingView.swift; path = ../RatingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,8 +78,8 @@
 		61518375230E80C400098751 /* List */ = {
 			isa = PBXGroup;
 			children = (
-				619ED4D3230D6C2A008A8DB4 /* ListCell.swift */,
-				619ED4D5230D6E81008A8DB4 /* RatingView.swift */,
+				6136D7732313D906002F009E /* ListCell.swift */,
+				6136D7742313D906002F009E /* RatingView.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -255,15 +255,15 @@
 				619ED4B7230D044B008A8DB4 /* ListViewController.swift in Sources */,
 				619ED4B5230D044B008A8DB4 /* AppDelegate.swift in Sources */,
 				619ED4D0230D16FE008A8DB4 /* reusableIdentifier.swift in Sources */,
-				619ED4D4230D6C2A008A8DB4 /* ListCell.swift in Sources */,
 				619ED4CB230D05BE008A8DB4 /* Service.swift in Sources */,
 				619ED4CD230D05C8008A8DB4 /* Data.swift in Sources */,
 				61518371230E61A600098751 /* DetailViewController.swift in Sources */,
-				619ED4D6230D6E81008A8DB4 /* RatingView.swift in Sources */,
 				6191128C230DA6B100CF59B0 /* ServiceType.swift in Sources */,
 				61518380230E9B9B00098751 /* InfoTableViewCell.swift in Sources */,
 				61518384230EB88300098751 /* CarouselTableViewCell.swift in Sources */,
+				6136D7752313D906002F009E /* ListCell.swift in Sources */,
 				6151838A230EEA8B00098751 /* DescriptionTableViewCell.swift in Sources */,
+				6136D7762313D906002F009E /* RatingView.swift in Sources */,
 				6151837A230E887500098751 /* CarouselCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
