@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class ListViewController: UIViewController {
 
@@ -14,8 +15,8 @@ class ListViewController: UIViewController {
     let service: ServiceType = Service()
     let keyword: String = "핸드메이드"
     private var list: DataModel? {
-        didSet {
-            guard let info = list?.results else { return }
+        willSet(newValue) {
+            guard let info = newValue?.results else { return }
             self.contents = info
         }
     }
@@ -31,7 +32,6 @@ class ListViewController: UIViewController {
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(ListCell.self, forCellReuseIdentifier: ListCell.reusableIdentifier)
@@ -45,13 +45,18 @@ class ListViewController: UIViewController {
         view.addSubview(tableView)
         title = keyword
         
-        if #available(iOS 11.0, *) {
-            navigationController?.navigationBar.prefersLargeTitles = true
-        }
-        
         configureConstraints()
         
         fetchData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = true
+            navigationController?.navigationItem.largeTitleDisplayMode = .always
+        }
     }
     
     func fetchData() {
@@ -68,13 +73,9 @@ class ListViewController: UIViewController {
     
     private func configureConstraints() {
         if #available(iOS 11, *) {
-            let guide = view.safeAreaLayoutGuide
-            NSLayoutConstraint.activate([
-                tableView.topAnchor.constraint(equalTo: guide.topAnchor),
-                tableView.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
-                tableView.bottomAnchor.constraint(equalTo: guide.bottomAnchor),
-                tableView.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
-            ])
+            tableView.snp.makeConstraints {
+                $0.edges.equalToSuperview()
+            }
         }
     }
 

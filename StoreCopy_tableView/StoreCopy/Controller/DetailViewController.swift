@@ -19,7 +19,7 @@ class DetailViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
         tableView.delegate = self
-//        tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
 //        tableView.rowHeight = UITableView.automaticDimension
 //        tableView.estimatedRowHeight = 60
         

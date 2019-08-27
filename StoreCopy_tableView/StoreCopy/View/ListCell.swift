@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 
 class ListCell: UITableViewCell {
-
+    
     // MARK: - Properties
     private var listData: ResultData!
     private let containerLayout: UIView = {
@@ -39,7 +39,7 @@ class ListCell: UITableViewCell {
     private lazy var midView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-//        view.backgroundColor = .white
+        //        view.backgroundColor = .white
         
         return view
     }()
@@ -52,12 +52,12 @@ class ListCell: UITableViewCell {
         
         return view
     }()
-
+    
     // 카테고리, 가격, 평점 뷰
     private lazy var lastView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-//        view.backgroundColor = .white
+        //        view.backgroundColor = .white
         
         return view
     }()
@@ -112,9 +112,19 @@ class ListCell: UITableViewCell {
     
     func configure(listData: ResultData, iconImage: UIImage?) {
         self.listData = listData
-        [containerLayout, imgView, midView, divideLine, lastView].forEach { contentView.addSubview($0) }
-        [title, seller].forEach { midView.addSubview($0) }
-        [category, price, rating].forEach { lastView.addSubview($0) }
+        contentView.addSubview(containerLayout)
+        contentView.addSubview(imgView)
+        
+        contentView.addSubview(midView)
+        midView.addSubview(title)
+        midView.addSubview(seller)
+        
+        contentView.addSubview(divideLine)
+        
+        contentView.addSubview(lastView)
+        lastView.addSubview(category)
+        lastView.addSubview(price)
+        lastView.addSubview(rating)
         
         selectionStyle = .none
         backgroundColor = #colorLiteral(red: 0.9568627451, green: 0.9568627451, blue: 0.9568627451, alpha: 1)
@@ -152,6 +162,7 @@ class ListCell: UITableViewCell {
             divideLine.leadingAnchor.constraint(equalTo: midView.leadingAnchor),
             divideLine.trailingAnchor.constraint(equalTo: midView.trailingAnchor),
             divideLine.bottomAnchor.constraint(equalTo: lastView.topAnchor),
+            divideLine.heightAnchor.constraint(equalToConstant: 1),
             
             lastView.leadingAnchor.constraint(equalTo: containerLayout.leadingAnchor),
             lastView.trailingAnchor.constraint(equalTo: containerLayout.trailingAnchor),
@@ -167,6 +178,6 @@ class ListCell: UITableViewCell {
             rating.trailingAnchor.constraint(equalTo: lastView.trailingAnchor, constant: -15),
             rating.widthAnchor.constraint(equalToConstant: 100),
             rating.heightAnchor.constraint(equalToConstant: 20)
-        ])
+            ])
     }
 }
