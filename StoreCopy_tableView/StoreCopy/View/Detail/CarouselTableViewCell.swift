@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class CarouselTableViewCell: UITableViewCell {
 
@@ -71,7 +72,7 @@ extension CarouselTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarouselCollectionViewCell.reusableIdentifier, for: indexPath) as? CarouselCollectionViewCell {
-            cell.imgView.downloadImageFrom(saveImageList[indexPath.item], contentMode: .scaleAspectFill)
+            cell.imgView.kf.setImage(with: URL(string: saveImageList[indexPath.item]))
             
             return cell
         }

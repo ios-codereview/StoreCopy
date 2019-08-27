@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ListCell: UITableViewCell {
 
@@ -119,9 +120,7 @@ class ListCell: UITableViewCell {
         backgroundColor = #colorLiteral(red: 0.9568627451, green: 0.9568627451, blue: 0.9568627451, alpha: 1)
         
         let imageUrl = URL(string: listData.artworkUrl512)!
-        let imageData = try! Data(contentsOf: imageUrl)
-        
-        imgView.image = UIImage(data: imageData)
+        imgView.kf.setImage(with: imageUrl)
         title.text = listData.trackName
         seller.text = listData.sellerName
         category.text = listData.genres[0]
