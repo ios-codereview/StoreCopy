@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class CategoryTableViewCell: UITableViewCell {
 
@@ -76,24 +77,32 @@ class CategoryTableViewCell: UITableViewCell {
     }
     
     private func configureConstraints() {
-        NSLayoutConstraint.activate([
-            topView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            topView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            topView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            topView.bottomAnchor.constraint(equalTo: title.topAnchor, constant: -20),
-            topView.heightAnchor.constraint(equalToConstant: 20),
-            title.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
-            title.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
-            title.bottomAnchor.constraint(equalTo: categoryLableView.topAnchor, constant: -50),
-            
-            categoryLableView.leadingAnchor.constraint(equalTo: title.leadingAnchor),
-            categoryLableView.trailingAnchor.constraint(equalTo: title.trailingAnchor),
-            categoryLableView.bottomAnchor.constraint(equalTo: bottomView.topAnchor, constant: -40),
-            bottomView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            bottomView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            bottomView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            bottomView.heightAnchor.constraint(equalToConstant: 20),
-        ])
+        topView.snp.makeConstraints{
+            $0.top.equalTo(contentView.snp.top)
+            $0.left.equalTo(contentView.snp.left)
+            $0.right.equalTo(contentView.snp.right)
+            $0.bottom.equalTo(title.snp.top).offset(-20)
+            $0.height.equalTo(20)
+        }
+        
+        title.snp.makeConstraints{
+            $0.left.equalTo(contentView.snp.left).offset(12)
+            $0.right.equalTo(contentView.snp.right).offset(-12)
+            $0.bottom.equalTo(categoryLableView.snp.top).offset(-50)
+        }
+        
+        categoryLableView.snp.makeConstraints{
+            $0.left.equalTo(title.snp.left)
+            $0.right.equalTo(title.snp.right)
+            $0.bottom.equalTo(bottomView.snp.top).offset(-40)
+        }
+        
+        bottomView.snp.makeConstraints{
+            $0.left.equalTo(contentView.snp.left)
+            $0.right.equalTo(contentView.snp.right)
+            $0.bottom.equalTo(contentView.snp.bottom)
+            $0.height.equalTo(20)
+        }
         
         categoryLabels.forEach{
             categoryLableView.addSubview($0)

@@ -7,12 +7,12 @@
 //
 
 import UIKit
+import SnapKit
 
 class NormalTableViewCell: UITableViewCell {
     
     lazy var title: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 18)
         
         return label
@@ -20,7 +20,6 @@ class NormalTableViewCell: UITableViewCell {
     
     lazy var data: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 15)
         label.textColor = #colorLiteral(red: 0.2588235438, green: 0.6535076654, blue: 0.7991336601, alpha: 1)
         
@@ -29,7 +28,6 @@ class NormalTableViewCell: UITableViewCell {
     
     lazy var line: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         
         return view
@@ -47,17 +45,23 @@ class NormalTableViewCell: UITableViewCell {
     }
     
     private func configure() {
-        NSLayoutConstraint.activate([
-            title.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
-            title.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
-            title.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15),
-            data.centerYAnchor.constraint(equalTo: title.centerYAnchor),
-            data.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -40),
-            line.leadingAnchor.constraint(equalTo: title.leadingAnchor),
-            line.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
-            line.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            line.heightAnchor.constraint(equalToConstant: 1),
-        ])
+        title.snp.makeConstraints{
+            $0.top.equalTo(contentView.snp.top).offset(15)
+            $0.left.equalTo(contentView.snp.left).offset(12)
+            $0.bottom.equalTo(contentView.snp.bottom).offset(-15)
+        }
+        
+        data.snp.makeConstraints{
+            $0.centerY.equalTo(title.snp.centerY)
+            $0.right.equalTo(contentView.snp.right).offset(-40)
+        }
+        
+        line.snp.makeConstraints{
+            $0.left.equalTo(title.snp.left)
+            $0.right.equalTo(contentView.snp.right).offset(-12)
+            $0.bottom.equalTo(contentView.snp.bottom)
+            $0.height.equalTo(1)
+        }
     }
 
 }

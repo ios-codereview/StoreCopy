@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import SnapKit
 
 class CarouselTableViewCell: UITableViewCell {
 
@@ -24,7 +25,6 @@ class CarouselTableViewCell: UITableViewCell {
         
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.contentInset = UIEdgeInsets(top: 0, left: 8, bottom: 8, right: 8)
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.dataSource = self
         view.isPagingEnabled = true
         view.showsHorizontalScrollIndicator = false
@@ -54,13 +54,14 @@ class CarouselTableViewCell: UITableViewCell {
     }
     
     private func configureConstraints() {
-        NSLayoutConstraint.activate([
-            carouselCollectionView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            carouselCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            carouselCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            carouselCollectionView.heightAnchor.constraint(equalToConstant: 440),
-            carouselCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
-        ])
+        
+        carouselCollectionView.snp.makeConstraints{
+            $0.top.equalTo(contentView.snp.top)
+            $0.left.equalTo(contentView.snp.left)
+            $0.bottom.equalTo(contentView.snp.bottom)
+            $0.right.equalTo(contentView.snp.right)
+            $0.height.equalTo(440)
+        }
     }
 
 }

@@ -7,19 +7,18 @@
 //
 
 import UIKit
+import SnapKit
 
 class FeatureTableViewCell: UITableViewCell {
     
     lazy var topView: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
     }()
     
     lazy var title: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 18)
         label.text = "1111"
         
@@ -28,7 +27,6 @@ class FeatureTableViewCell: UITableViewCell {
     
     lazy var data: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 15)
         label.textColor = #colorLiteral(red: 0.2588235438, green: 0.6535076654, blue: 0.7991336601, alpha: 1)
         
@@ -37,7 +35,6 @@ class FeatureTableViewCell: UITableViewCell {
     
     lazy var expandArrow: UIImageView = {
         let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(named: "arrow")
         
         return imageView
@@ -45,7 +42,6 @@ class FeatureTableViewCell: UITableViewCell {
     
     lazy var bottomView: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = UIColor(red: 0.95, green: 0.95,
                                            blue: 0.95, alpha: 1)
         
@@ -54,7 +50,6 @@ class FeatureTableViewCell: UITableViewCell {
     
     lazy var bottomViewText: UITextView = {
         let textView = UITextView()
-        textView.translatesAutoresizingMaskIntoConstraints = false
         textView.isScrollEnabled = false
         textView.isEditable = false
         textView.font = UIFont.systemFont(ofSize: 15)
@@ -86,28 +81,42 @@ class FeatureTableViewCell: UITableViewCell {
     var popShowPriority: NSLayoutConstraint?
     
     private func configureConstraints() {
-        NSLayoutConstraint.activate([
-            topView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            topView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
-            topView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
-            topView.bottomAnchor.constraint(equalTo: bottomView.topAnchor),
-            topView.heightAnchor.constraint(equalToConstant: 60),
-            title.topAnchor.constraint(equalTo: topView.topAnchor, constant: 15),
-            title.leadingAnchor.constraint(equalTo: topView.leadingAnchor),
-            title.bottomAnchor.constraint(equalTo: topView.bottomAnchor, constant: -15),
-            data.centerYAnchor.constraint(equalTo: title.centerYAnchor),
-            data.trailingAnchor.constraint(equalTo: expandArrow.leadingAnchor),
-            expandArrow.centerYAnchor.constraint(equalTo: title.centerYAnchor),
-            expandArrow.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            bottomView.leadingAnchor.constraint(equalTo: topView.leadingAnchor),
-            bottomView.trailingAnchor.constraint(equalTo: topView.trailingAnchor),
-            bottomView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            
-            bottomViewText.topAnchor.constraint(equalTo: bottomView.topAnchor, constant: 12),
-            bottomViewText.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor, constant: 12),
-            bottomViewText.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor, constant: -12),
-            bottomViewText.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor, constant: -12),
-        ])
+        topView.snp.makeConstraints{
+            $0.top.equalTo(contentView.snp.top)
+            $0.left.equalTo(contentView.snp.left).offset(12)
+            $0.right.equalTo(contentView.snp.right).offset(-12)
+            $0.bottom.equalTo(bottomView.snp.top)
+            $0.height.equalTo(60)
+        }
+        
+        title.snp.makeConstraints{
+            $0.top.equalTo(topView.snp.top).offset(15)
+            $0.left.equalTo(topView.snp.left)
+            $0.bottom.equalTo(topView.snp.bottom).offset(-15)
+        }
+        
+        data.snp.makeConstraints{
+            $0.centerY.equalTo(title.snp.centerY)
+            $0.right.equalTo(expandArrow.snp.left)
+        }
+        
+        expandArrow.snp.makeConstraints{
+            $0.centerY.equalTo(title.snp.centerY)
+            $0.right.equalTo(contentView.snp.right).offset(-10)
+        }
+        
+        bottomView.snp.makeConstraints{
+            $0.left.equalTo(topView.snp.left)
+            $0.right.equalTo(topView.snp.right)
+            $0.bottom.equalTo(contentView.snp.bottom)
+        }
+        
+        bottomViewText.snp.makeConstraints{
+            $0.top.equalTo(bottomView.snp.top).offset(12)
+            $0.left.equalTo(bottomView.snp.left).offset(12)
+            $0.right.equalTo(bottomView.snp.right).offset(-12)
+            $0.bottom.equalTo(bottomView.snp.bottom).offset(-12)
+        }
     }
     
 

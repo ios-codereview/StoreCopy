@@ -7,12 +7,12 @@
 //
 
 import UIKit
+import SnapKit
 
 class DescriptionTableViewCell: UITableViewCell {
     
     lazy var data: UITextView = {
         let textView = UITextView()
-        textView.translatesAutoresizingMaskIntoConstraints = false
         textView.isEditable = false
         textView.isScrollEnabled = false
         textView.textAlignment = .center
@@ -33,13 +33,10 @@ class DescriptionTableViewCell: UITableViewCell {
     }
     
     private func configure() {
-        NSLayoutConstraint.activate([
-            data.topAnchor.constraint(equalTo: contentView.topAnchor),
-            data.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            data.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            data.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            data.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height / 4)
-        ])
+        data.snp.makeConstraints{
+            $0.edges.equalTo(contentView.snp.edges)
+            $0.height.equalTo(UIScreen.main.bounds.height / 4)
+        }
     }
 
 }

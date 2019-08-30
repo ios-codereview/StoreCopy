@@ -30,7 +30,6 @@ class InfoTableViewCell: UITableViewCell {
     
     lazy var title: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
         
         return label
@@ -38,7 +37,6 @@ class InfoTableViewCell: UITableViewCell {
     
     lazy var seller: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         
@@ -47,7 +45,6 @@ class InfoTableViewCell: UITableViewCell {
     
     lazy var price: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
         
         return label
@@ -55,7 +52,6 @@ class InfoTableViewCell: UITableViewCell {
     
     lazy var buttonWrap: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         view.layer.borderWidth = 1
         view.layer.cornerRadius = 5
@@ -65,7 +61,6 @@ class InfoTableViewCell: UITableViewCell {
     
     lazy var webButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("웹에서 보기", for: .normal)
         button.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
         button.addTarget(self, action: #selector(webButtonAction(sender:)), for: .touchUpInside)
@@ -75,7 +70,6 @@ class InfoTableViewCell: UITableViewCell {
     
     lazy var halfLine: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         
         return view
@@ -83,7 +77,6 @@ class InfoTableViewCell: UITableViewCell {
     
     lazy var shareButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("공유하기", for: .normal)
         button.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
         button.addTarget(self, action: #selector(shareButtonAction(sender:)), for: .touchUpInside)
@@ -93,7 +86,6 @@ class InfoTableViewCell: UITableViewCell {
     
     lazy var line: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         
         return view
@@ -149,20 +141,26 @@ class InfoTableViewCell: UITableViewCell {
             $0.right.equalTo(halfLine.snp.left)
         }
         
-        NSLayoutConstraint.activate([
-            halfLine.topAnchor.constraint(equalTo: buttonWrap.topAnchor),
-            halfLine.bottomAnchor.constraint(equalTo: buttonWrap.bottomAnchor),
-            halfLine.centerXAnchor.constraint(equalTo: buttonWrap.centerXAnchor),
-            halfLine.trailingAnchor.constraint(equalTo: shareButton.leadingAnchor),
-            shareButton.topAnchor.constraint(equalTo: buttonWrap.topAnchor),
-            shareButton.trailingAnchor.constraint(equalTo: buttonWrap.trailingAnchor),
-            shareButton.bottomAnchor.constraint(equalTo: buttonWrap.bottomAnchor),
-            shareButton.widthAnchor.constraint(equalTo: buttonWrap.widthAnchor, multiplier: 0.5, constant: -0.5),
-            line.leadingAnchor.constraint(equalTo: buttonWrap.leadingAnchor),
-            line.trailingAnchor.constraint(equalTo: buttonWrap.trailingAnchor),
-            line.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            line.heightAnchor.constraint(equalToConstant: 1)
-        ])
+        halfLine.snp.makeConstraints{
+            $0.top.equalTo(buttonWrap.snp.top)
+            $0.bottom.equalTo(buttonWrap.snp.bottom)
+            $0.centerX.equalTo(buttonWrap.snp.centerX)
+            $0.right.equalTo(shareButton.snp.left)
+        }
+        
+        shareButton.snp.makeConstraints{
+            $0.top.equalTo(buttonWrap.snp.top)
+            $0.right.equalTo(buttonWrap.snp.right)
+            $0.bottom.equalTo(buttonWrap.snp.bottom)
+            $0.width.equalTo(buttonWrap.snp.width).offset(-0.5).multipliedBy(0.5)
+        }
+        
+        line.snp.makeConstraints{
+            $0.left.equalTo(buttonWrap.snp.left)
+            $0.right.equalTo(buttonWrap.snp.right)
+            $0.bottom.equalTo(contentView.snp.bottom)
+            $0.height.equalTo(1)
+        }
         
     }
     
