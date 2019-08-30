@@ -7,11 +7,11 @@
 //
 
 import UIKit
+import SnapKit
 
 class CarouselCollectionViewCell: UICollectionViewCell {
     let imgView: UIImageView = {
         let imgView = UIImageView()
-        imgView.translatesAutoresizingMaskIntoConstraints = false
         imgView.clipsToBounds = true
         imgView.contentMode = .scaleAspectFill
         return imgView
@@ -32,11 +32,8 @@ class CarouselCollectionViewCell: UICollectionViewCell {
     }
     
     private func configureConstraints() {
-        NSLayoutConstraint.activate([
-            imgView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            imgView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            imgView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            imgView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-        ])
+        imgView.snp.makeConstraints{
+            $0.edges.equalTo(contentView.snp.edges)
+        }
     }
 }

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SnapKit
 
 class DetailViewController: UIViewController {
     
@@ -16,7 +16,6 @@ class DetailViewController: UIViewController {
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
@@ -64,12 +63,9 @@ class DetailViewController: UIViewController {
     }
     
     private func configureConstraints() {
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-        ])
+        tableView.snp.makeConstraints{
+            $0.edges.equalTo(view.snp.edges)
+        }
     }
 }
 

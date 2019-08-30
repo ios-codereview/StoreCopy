@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 protocol webButtonDelegate {
     func webButtonAction(sender: UIButton)
@@ -116,24 +117,39 @@ class InfoTableViewCell: UITableViewCell {
     }
 
     private func configureConstraints() {
+        title.snp.makeConstraints{
+            $0.top.equalTo(contentView.snp.top)
+            $0.left.equalTo(contentView.snp.left).offset(12)
+            $0.bottom.equalTo(seller.snp.top).offset(-3)
+        }
+        
+        seller.snp.makeConstraints{
+            $0.left.equalTo(title.snp.left)
+            $0.bottom.equalTo(price.snp.top).offset(-8)
+        }
+        
+        price.snp.makeConstraints{
+            $0.left.equalTo(title.snp.left)
+            $0.bottom.equalTo(buttonWrap.snp.top).offset(-12)
+        }
+        
+        buttonWrap.snp.makeConstraints{
+            $0.left.equalTo(title.snp.left)
+            $0.width.equalTo(contentView.snp.width).offset(-24)
+            $0.right.equalTo(contentView.snp.right).offset(-12)
+            $0.bottom.equalTo(line.snp.top).offset(-10)
+            $0.height.equalTo(50)
+        }
+        
+        webButton.snp.makeConstraints{
+            $0.top.equalTo(buttonWrap.snp.top)
+            $0.left.equalTo(buttonWrap.snp.left)
+            $0.bottom.equalTo(buttonWrap.snp.bottom)
+            $0.width.equalTo(buttonWrap.snp.width).offset(-0.5).multipliedBy(0.5)
+            $0.right.equalTo(halfLine.snp.left)
+        }
+        
         NSLayoutConstraint.activate([
-            title.topAnchor.constraint(equalTo: contentView.topAnchor),
-            title.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
-            title.bottomAnchor.constraint(equalTo: seller.topAnchor, constant: -3),
-            seller.leadingAnchor.constraint(equalTo: title.leadingAnchor),
-            seller.bottomAnchor.constraint(equalTo: price.topAnchor, constant: -8),
-            price.leadingAnchor.constraint(equalTo: title.leadingAnchor),
-            price.bottomAnchor.constraint(equalTo: buttonWrap.topAnchor, constant: -12),
-            buttonWrap.leadingAnchor.constraint(equalTo: title.leadingAnchor),
-            buttonWrap.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -24),
-            buttonWrap.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
-            buttonWrap.bottomAnchor.constraint(equalTo: line.topAnchor, constant: -10),
-            buttonWrap.heightAnchor.constraint(equalToConstant: 50),
-            webButton.topAnchor.constraint(equalTo: buttonWrap.topAnchor),
-            webButton.leadingAnchor.constraint(equalTo: buttonWrap.leadingAnchor),
-            webButton.bottomAnchor.constraint(equalTo: buttonWrap.bottomAnchor),
-            webButton.widthAnchor.constraint(equalTo: buttonWrap.widthAnchor, multiplier: 0.5, constant: -0.5),
-            webButton.trailingAnchor.constraint(equalTo: halfLine.leadingAnchor),
             halfLine.topAnchor.constraint(equalTo: buttonWrap.topAnchor),
             halfLine.bottomAnchor.constraint(equalTo: buttonWrap.bottomAnchor),
             halfLine.centerXAnchor.constraint(equalTo: buttonWrap.centerXAnchor),

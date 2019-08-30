@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import SnapKit
 
 class ListCell: UITableViewCell {
     
@@ -15,7 +16,6 @@ class ListCell: UITableViewCell {
     private var listData: ResultData!
     private let containerLayout: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.masksToBounds = true
         view.clipsToBounds = true
         view.layer.cornerRadius = 5
@@ -29,7 +29,6 @@ class ListCell: UITableViewCell {
     // 로고 이미지뷰
     private lazy var imgView: UIImageView = {
         let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         
         return imageView
@@ -38,7 +37,6 @@ class ListCell: UITableViewCell {
     // 타이틀 & 판매자명 뷰
     private lazy var midView: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         //        view.backgroundColor = .white
         
         return view
@@ -46,7 +44,6 @@ class ListCell: UITableViewCell {
     
     private lazy var divideLine: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         view.layer.borderWidth = 1
         
@@ -56,15 +53,12 @@ class ListCell: UITableViewCell {
     // 카테고리, 가격, 평점 뷰
     private lazy var lastView: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        //        view.backgroundColor = .white
         
         return view
     }()
     
     private lazy var title: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         
@@ -73,7 +67,6 @@ class ListCell: UITableViewCell {
     
     private lazy var seller: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         label.textColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         
@@ -82,7 +75,6 @@ class ListCell: UITableViewCell {
     
     private lazy var category: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         
@@ -91,7 +83,6 @@ class ListCell: UITableViewCell {
     
     private lazy var price: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 17, weight: .regular)
         
         return label
@@ -99,7 +90,6 @@ class ListCell: UITableViewCell {
     
     private lazy var rating: RatingView = {
         let view = RatingView(averageRating: listData.averageUserRating ?? 0.0)
-        view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
     }()
@@ -112,19 +102,10 @@ class ListCell: UITableViewCell {
     
     func configure(listData: ResultData, iconImage: UIImage?) {
         self.listData = listData
-        contentView.addSubview(containerLayout)
-        contentView.addSubview(imgView)
         
-        contentView.addSubview(midView)
-        midView.addSubview(title)
-        midView.addSubview(seller)
-        
-        contentView.addSubview(divideLine)
-        
-        contentView.addSubview(lastView)
-        lastView.addSubview(category)
-        lastView.addSubview(price)
-        lastView.addSubview(rating)
+        [containerLayout, imgView, midView, divideLine, lastView].forEach{ contentView.addSubview($0) }
+        [title, seller].forEach{ midView.addSubview($0) }
+        [category, price, rating].forEach{ lastView.addSubview($0) }
         
         selectionStyle = .none
         backgroundColor = #colorLiteral(red: 0.9568627451, green: 0.9568627451, blue: 0.9568627451, alpha: 1)
@@ -138,46 +119,68 @@ class ListCell: UITableViewCell {
     }
     
     private func configureConstraints() {
-        NSLayoutConstraint.activate([
-            containerLayout.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            containerLayout.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-            containerLayout.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
-            containerLayout.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
-            imgView.topAnchor.constraint(equalTo: containerLayout.topAnchor),
-            imgView.leadingAnchor.constraint(equalTo: containerLayout.leadingAnchor),
-            imgView.trailingAnchor.constraint(equalTo: containerLayout.trailingAnchor),
-            imgView.bottomAnchor.constraint(equalTo: midView.topAnchor),
-            imgView.heightAnchor.constraint(equalTo: imgView.widthAnchor),
-            
-            midView.leadingAnchor.constraint(equalTo: containerLayout.leadingAnchor),
-            midView.trailingAnchor.constraint(equalTo: containerLayout.trailingAnchor),
-            midView.bottomAnchor.constraint(equalTo: divideLine.topAnchor),
-            title.topAnchor.constraint(equalTo: midView.topAnchor, constant: 10),
-            title.leadingAnchor.constraint(equalTo: midView.leadingAnchor, constant: 10),
-            title.widthAnchor.constraint(equalTo: midView.widthAnchor),
-            title.bottomAnchor.constraint(equalTo: seller.topAnchor, constant: -5),
-            seller.leadingAnchor.constraint(equalTo: title.leadingAnchor),
-            seller.bottomAnchor.constraint(equalTo: midView.bottomAnchor, constant: -10),
-            
-            divideLine.leadingAnchor.constraint(equalTo: midView.leadingAnchor),
-            divideLine.trailingAnchor.constraint(equalTo: midView.trailingAnchor),
-            divideLine.bottomAnchor.constraint(equalTo: lastView.topAnchor),
-            divideLine.heightAnchor.constraint(equalToConstant: 1),
-            
-            lastView.leadingAnchor.constraint(equalTo: containerLayout.leadingAnchor),
-            lastView.trailingAnchor.constraint(equalTo: containerLayout.trailingAnchor),
-            lastView.bottomAnchor.constraint(equalTo: containerLayout.bottomAnchor),
-            lastView.heightAnchor.constraint(equalTo: midView.heightAnchor),
-            category.topAnchor.constraint(equalTo: lastView.topAnchor, constant: 10),
-            category.leadingAnchor.constraint(equalTo: lastView.leadingAnchor, constant: 10),
-            category.bottomAnchor.constraint(equalTo: price.topAnchor, constant: -5),
-            price.leadingAnchor.constraint(equalTo: category.leadingAnchor),
-            price.bottomAnchor.constraint(equalTo: lastView.bottomAnchor, constant: -10),
-            
-            rating.topAnchor.constraint(equalTo: lastView.topAnchor, constant: 5),
-            rating.trailingAnchor.constraint(equalTo: lastView.trailingAnchor, constant: -15),
-            rating.widthAnchor.constraint(equalToConstant: 100),
-            rating.heightAnchor.constraint(equalToConstant: 20)
-            ])
+        containerLayout.snp.makeConstraints{
+            $0.top.left.equalToSuperview().offset(8)
+            $0.bottom.right.equalToSuperview().offset(-8)
+        }
+        
+        imgView.snp.makeConstraints{
+            $0.top.equalTo(containerLayout.snp.top)
+            $0.left.equalTo(containerLayout.snp.left)
+            $0.right.equalTo(containerLayout.snp.right)
+            $0.bottom.equalTo(midView.snp.top)
+            $0.width.equalTo(containerLayout.snp.width)
+            $0.height.equalTo(imgView.snp.width)
+        }
+        
+        midView.snp.makeConstraints{
+            $0.left.equalTo(containerLayout.snp.left)
+            $0.right.equalTo(containerLayout.snp.right)
+            $0.bottom.equalTo(divideLine.snp.top)
+        }
+        
+        title.snp.makeConstraints{
+            $0.top.equalTo(midView.snp.top).offset(10)
+            $0.left.equalTo(midView.snp.left).offset(10)
+            $0.width.equalTo(midView.snp.width)
+            $0.bottom.equalTo(seller.snp.top).offset(-5)
+        }
+        
+        seller.snp.makeConstraints{
+            $0.left.equalTo(title.snp.left)
+            $0.bottom.equalTo(midView.snp.bottom).offset(-10)
+        }
+        
+        divideLine.snp.makeConstraints{
+            $0.left.equalTo(midView.snp.left)
+            $0.right.equalTo(midView.snp.right)
+            $0.bottom.equalTo(lastView.snp.top)
+            $0.height.equalTo(1)
+        }
+        
+        lastView.snp.makeConstraints{
+            $0.left.equalTo(containerLayout.snp.left)
+            $0.right.equalTo(containerLayout.snp.right)
+            $0.bottom.equalTo(containerLayout.snp.bottom)
+            $0.height.equalTo(midView.snp.height)
+        }
+        
+        category.snp.makeConstraints{
+            $0.top.equalTo(lastView.snp.top).offset(10)
+            $0.left.equalTo(lastView.snp.left).offset(10)
+            $0.bottom.equalTo(price.snp.top).offset(-5)
+        }
+        
+        price.snp.makeConstraints{
+            $0.left.equalTo(category.snp.left)
+            $0.bottom.equalTo(lastView.snp.bottom).offset(-10)
+        }
+        
+        rating.snp.makeConstraints{
+            $0.top.equalTo(lastView.snp.top).offset(5)
+            $0.right.equalTo(lastView.snp.right).offset(-15)
+            $0.width.equalTo(100)
+            $0.height.equalTo(20)
+        }
     }
 }
