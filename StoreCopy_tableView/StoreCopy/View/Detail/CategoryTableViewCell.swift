@@ -26,7 +26,6 @@ class CategoryTableViewCell: UITableViewCell {
     
     lazy var title: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
         
         return label
@@ -34,14 +33,12 @@ class CategoryTableViewCell: UITableViewCell {
     
     lazy var categoryLableView: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
     }()
     
     lazy var topView: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = #colorLiteral(red: 0.9490196078, green: 0.9490196078, blue: 0.9490196078, alpha: 1)
         
         return view
@@ -49,7 +46,6 @@ class CategoryTableViewCell: UITableViewCell {
     
     lazy var bottomView: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = #colorLiteral(red: 0.9490196078, green: 0.9490196078, blue: 0.9490196078, alpha: 1)
         
         return view
