@@ -8,8 +8,11 @@
 
 import UIKit
 
+// Review: [Refactoring] 미구현되었습니다 ㅎ
+// https://github.com/kimtaesu/StretchHeader/blob/master/StretchHeaderTutirial/CustomLayout/CustomLayout.swift
 class StretchyHeaderLayout: UICollectionViewFlowLayout {
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        print("layoutAttributesForElements:in")
         let layoutAttributes = super.layoutAttributesForElements(in: rect)
         layoutAttributes?.forEach({ (attributes) in
             if attributes.representedElementKind == UICollectionView.elementKindSectionHeader && attributes.indexPath.section == 0 {

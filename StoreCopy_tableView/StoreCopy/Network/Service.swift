@@ -12,6 +12,9 @@ class Service: ServiceType {
     
     func fetchListDataAPI(term: String, completion: @escaping (Result<DataModel, ServiceError>) -> Void) {
         
+        // Review: [Refactoring] 함수 내부에서 url 를 지정하면 변경에 취약합니다~
+        // func fetchListDataAPI(request: URLRequest..)
+        // URLRequest 를 parameter 로 전달받는 것이 좋아 보입니다!
         let str = "https://itunes.apple.com/kr/search?term=\(term)&country=kr&media=software"
         let encoded = str.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)
         

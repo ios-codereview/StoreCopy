@@ -65,13 +65,19 @@ class CarouselTableViewCell: UITableViewCell {
     }
 
 }
-
+extension CarouselTableViewCell: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        // Review: [성능] 이미지 다운로드를 취소해야 합니다 ㅎ
+//        cell.imgView.kf.cancelDownloadTask()
+    }
+}
 extension CarouselTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return saveImageList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        // Review: [사용성] 이미지가 짤리는 것 같습니다 ^^;;
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarouselCollectionViewCell.reusableIdentifier, for: indexPath) as? CarouselCollectionViewCell {
             cell.imgView.kf.setImage(with: URL(string: saveImageList[indexPath.item]))
             

@@ -12,6 +12,7 @@ import SnapKit
 class ListViewController: UIViewController {
 
     // MARK: - Properties
+    // Review: [Refactoring] ServiceType 을 외부에서 주입받는 것이 좋지 않을까요?
     let service: ServiceType = Service()
     let keyword: String = "핸드메이드"
     private var list: DataModel? {
@@ -65,6 +66,7 @@ class ListViewController: UIViewController {
             case .success(let product):
                 self.list = product
             case .failure(let error):
+                // Review: [사용성] 실패했을때 사용자에게 Alert 같은걸 보여주는 것이 좋지 않을까요~? ㅎ
                 print("error")
             }
             

@@ -16,7 +16,9 @@ extension UIImageView {
             DispatchQueue.main.async {
                 self.contentMode =  contentMode
                 if let data = data { self.image = UIImage(data: data) }
+                // Review: [사용성] 에러 처리가 필요해 보입니다!
             }
+            
         }).resume()
     }
 }

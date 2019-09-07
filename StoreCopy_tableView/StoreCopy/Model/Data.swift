@@ -25,13 +25,14 @@ import Foundation
 */
 
 // MARK: - DataModel
-struct DataModel: Codable {
+// Review: [Refactoring] encode 하지 않기 때문에 Decodable protocol을 따르는 것이 좋지 않을까요?
+struct DataModel: Decodable {
     let resultCount: Int
     let results: [ResultData]
 }
 
 // MARK: - Result
-struct ResultData: Codable {
+struct ResultData: Decodable {
     let artworkUrl512: String
     let sellerName: String
     let trackName: String

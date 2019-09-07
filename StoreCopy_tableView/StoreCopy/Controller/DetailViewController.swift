@@ -77,6 +77,7 @@ extension DetailViewController: UITableViewDelegate {
             } else {
                 isToggle = false
             }
+            // Review: [사용성] "새로운 기능"의 더보기 버튼을 누르면 스크롤이 위로 튑니다.
             tableView.beginUpdates()
             tableView.reloadRows(at: [IndexPath.init(row: 4, section: 0)], with: .none)
             tableView.endUpdates()
@@ -85,6 +86,7 @@ extension DetailViewController: UITableViewDelegate {
 }
 extension DetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // Review: [Refactoring] 상수를 쓰는 것이 좋지 않은 것 같습니다~ ㅎ
         return 7
     }
     

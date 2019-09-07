@@ -11,7 +11,7 @@ import Kingfisher
 import SnapKit
 
 class ListCell: UITableViewCell {
-    
+    // Review: [사용성] 화면을 전환화면 이미지만 나옵니다 ㅎ
     // MARK: - Properties
     private var listData: ResultData!
     private let containerLayout: UIView = {

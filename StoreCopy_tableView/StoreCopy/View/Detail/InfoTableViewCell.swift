@@ -19,6 +19,7 @@ protocol shareButtonDelegate {
 
 class InfoTableViewCell: UITableViewCell {
 
+    // Review: [성능] weak 키워드를 붙여야합니다. 순환참조가 발생합니다.
     var webDelegate: webButtonDelegate?
     var shareDelegate: shareButtonDelegate?
     
