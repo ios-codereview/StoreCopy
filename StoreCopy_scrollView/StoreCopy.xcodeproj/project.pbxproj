@@ -26,6 +26,7 @@
 		619ED4D0230D16FE008A8DB4 /* reusableIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619ED4CF230D16FE008A8DB4 /* reusableIdentifier.swift */; };
 		619ED4D4230D6C2A008A8DB4 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619ED4D3230D6C2A008A8DB4 /* ListCell.swift */; };
 		619ED4D6230D6E81008A8DB4 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619ED4D5230D6E81008A8DB4 /* RatingView.swift */; };
+		BD1152A32323A8160078AEAB /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = BD1152A22323A8160078AEAB /* .swiftlint.yml */; };
 		C44FD4043C4ADDF439BC22DB /* Pods_StoreCopy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7BF585A4E61634E302437A5 /* Pods_StoreCopy.framework */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +53,7 @@
 		619ED4CF230D16FE008A8DB4 /* reusableIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reusableIdentifier.swift; sourceTree = "<group>"; };
 		619ED4D3230D6C2A008A8DB4 /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ListCell.swift; path = ../ListCell.swift; sourceTree = "<group>"; };
 		619ED4D5230D6E81008A8DB4 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RatingView.swift; path = ../RatingView.swift; sourceTree = "<group>"; };
+		BD1152A22323A8160078AEAB /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		F7BF585A4E61634E302437A5 /* Pods_StoreCopy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StoreCopy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC14F932D8057A36F77CFA73 /* Pods-StoreCopy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StoreCopy.release.xcconfig"; path = "Target Support Files/Pods-StoreCopy/Pods-StoreCopy.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -108,6 +110,7 @@
 		619ED4A8230D044A008A8DB4 = {
 			isa = PBXGroup;
 			children = (
+				BD1152A22323A8160078AEAB /* .swiftlint.yml */,
 				619ED4B3230D044B008A8DB4 /* StoreCopy */,
 				619ED4B2230D044B008A8DB4 /* Products */,
 				C753431D87B52121B191B16E /* Pods */,
@@ -206,6 +209,8 @@
 				619ED4AE230D044B008A8DB4 /* Frameworks */,
 				619ED4AF230D044B008A8DB4 /* Resources */,
 				666C40EA324DEC2BA22944EC /* [CP] Embed Pods Frameworks */,
+				BD1152A02323A7E50078AEAB /* Review */,
+				BD1152A12323A7ED0078AEAB /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -254,6 +259,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD1152A32323A8160078AEAB /* .swiftlint.yml in Resources */,
 				619ED4BF230D044E008A8DB4 /* LaunchScreen.storyboard in Resources */,
 				619ED4BC230D044E008A8DB4 /* Assets.xcassets in Resources */,
 			);
@@ -270,14 +276,59 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-StoreCopy/Pods-StoreCopy-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-StoreCopy/Pods-StoreCopy-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-StoreCopy/Pods-StoreCopy-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StoreCopy/Pods-StoreCopy-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		BD1152A02323A7E50078AEAB /* Review */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Review;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n# Type a script or drag a script file from your workspace to insert its path.\nTAGS=\"Review:\"\nERRORTAG=\"ERROR:\"\nfind \"${SRCROOT}\" \\( -name \"*.h\" -or -name \"*.m\" -or -name \"*.swift\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$|($ERRORTAG).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\" | perl -p -e \"s/($ERRORTAG)/ error: \\$1/\"\n";
+		};
+		BD1152A12323A7ED0078AEAB /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		CE0939549EE91312EFEC5DE0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
